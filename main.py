@@ -1,9 +1,10 @@
 from flask import Flask,render_template
 from flask_cors import CORS
 from flask import jsonify
+from flask import request
+import partial_bot
 app = Flask(__name__)
 CORS(app)
-
 
 posts = [
     {
@@ -18,9 +19,13 @@ posts = [
     }
 ]
 @app.route("/home")
-@app.route("/api/")
+@app.route("/api/",methods=['GET'])
 def home():
-    return jsonify(posts)
+    req = (request.args.get('r'))  
+    print(str(req))
+    res = (partial_bot.chat(req))
+    print(res)
+    return jsonify(res)
 
 @app.route("/about")
 def about():
