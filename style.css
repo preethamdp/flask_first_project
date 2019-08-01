@@ -1,0 +1,20 @@
+#hello-world{
+    position: fixed;
+    bottom: 250px;
+    right:40%;
+    width :300px;
+    height :400px;
+    border: 2px solid red;
+    padding: 10px;
+    padding-bottom: 50px;
+    border-radius: 5px;
+}
+#hello-world div input[type='text']{
+    width: 75%;
+    padding-left: 16px;
+    height: 30px;
+}
+#hello-world div button{
+    width: 12%;
+    height: 35px;
+}

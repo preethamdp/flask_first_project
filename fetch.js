@@ -2,6 +2,7 @@
 //using jsonplaceholder for the data
 
 const uri = 'http://127.0.0.1:5000/api/?r=';
+var head = document.getElementsByTagName("head")[0]
 
 //new Request(uri)
 //new Request(uri, options)
@@ -20,36 +21,39 @@ let req = new Request(uri, {
     headers: h,
     mode: 'cors'
 });
-// function loadDoc(){
-// fetch(req)
-//     .then( (response)=>{
-//         if(response.ok){
-//             return response.json();
-//         }else{
-//             throw new Error('BAD HTTP stuff');
-//         }
-//     })
-//     .then( (jsonData) =>{
-//         console.log(jsonData);
-//     })
-//     .catch( (err) =>{
-//         console.log('ERROR:', err.message);
-//     });
-// }
+
 function loadDoc(){
     var uri_prepare = uri
-    var inp = document.getElementById("input").value;
-    uri_prepare += inp
-    
+    var inp = document.getElementById("bot-input-value").value;
+    if (inp!=""){
+    //user message
+    var user_data = document.createElement("script");
+          user_data.setAttribute('type','text/javascript');
+          user_data.innerHTML = "botui.message.add({human:true,\ncontent: '"+inp.toString()+"'});"
+          head.appendChild(user_data)
 
+    uri_prepare += inp
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("content").innerHTML =this.responseText;
         var myArr = JSON.parse(this.responseText);
+        console.log(len = Object.keys(myArr).length);
         console.log(myArr)
+        console.log(len)
+        
+        
+        for(var key in myArr){
+          var single_data = document.createElement("script");
+          single_data.setAttribute('type','text/javascript');
+          single_data.innerHTML = "botui.message.add({content: '"+myArr[key].toString()+"'});"
+          head.appendChild(single_data)
+        }
+
       }
+    
     };
     xhttp.open("GET", uri_prepare, true);
     xhttp.send();
+  }
+
 }
