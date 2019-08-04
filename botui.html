@@ -15,7 +15,7 @@
       <bot-ui></bot-ui>
       <div id="bot-ui-input-box-btn"  >
             <input type="text" id="bot-input-value" placeholder="Ask anything" >
-            <button class="btn" onclick="loadDoc()"><i class="fa fa-send"></i></button>
+            <button class="btn" id = "bot-send" onclick="loadDoc()"><i class="fa fa-send"></i></button>
           
         </div>
     </div>
@@ -26,12 +26,9 @@
     <script id="bot-messages">
       var botui = new BotUI('hello-world');
       botui.message.add({
-  content: 'Go ahead, try [our product](https://example.com)'
+  content: 'Welcome to v1_bot'
 });
-botui.message.add({
-  human:true,
-  content: 'Go ahead, try [our product](https://example.com)'
-});
+
 
     </script>
   </body>

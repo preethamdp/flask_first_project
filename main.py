@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask import jsonify
 from flask import request
 import partial_bot
+import noun_extractor
 app = Flask(__name__)
 CORS(app)
 
@@ -18,11 +19,15 @@ posts = [
         'content':'ipsum lorem'
     }
 ]
+
+
+
 @app.route("/home")
 @app.route("/api/",methods=['GET'])
 def home():
     req = (request.args.get('r'))  
     print(str(req))
+    req = noun_extractor.convert_to_noun(str(req))
     res = (partial_bot.chat(req))
     print(res)
     return jsonify(res)
